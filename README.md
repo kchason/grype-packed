@@ -1,7 +1,5 @@
 # Grype Packed
 
-***The automated build has not yet been built so this repository is not yet functional.***
-
 This is a watcher repository surrounding [Anchore's Grype](https://github.com/anchore/grype) to package the current vulnerabilty database into the container image. This makes it easier to run Grype in an offline or air-gapped environment.
 
 ## Usage

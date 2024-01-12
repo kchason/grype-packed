@@ -27,5 +27,4 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
         docker push kchason/grype-packed:latest
         docker push kchason/grype-packed:$(date '+%Y%m%d')
-    
-        
+  
