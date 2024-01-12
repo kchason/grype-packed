@@ -1,10 +1,11 @@
 name: Docker Image CI
 
 on:
+  # Trigger the workflow on push to the main branch or every night at 00:00
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
 
@@ -20,5 +21,11 @@ jobs:
       run: | 
         docker build . --file Dockerfile --tag kchason/grype-packed:latest
         docker tag kchason/grype-packed:latest kchason/grype-packed:$(date '+%Y%m%d')
+        
+    - name: Push the Docker Image
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+        docker push kchason/grype-packed:latest
+        docker push kchason/grype-packed:$(date '+%Y%m%d')
     
         
