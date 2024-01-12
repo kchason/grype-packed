@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      
+    - name: Build the Docker image
+      run: | 
+        docker build . --file Dockerfile --tag kchason/grype-packed:latest
+        docker tag kchason/grype-packed:latest kchason/grype-packed:$(date '+%Y%m%d')
+    
+        
